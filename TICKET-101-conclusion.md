@@ -16,17 +16,17 @@ profile, but for the sake of simplicity this part can be mocked as a hard coded 
 
 ## Functionality
 - **Completeness:**
-  - The requirements were implemented partitially as the solution does not take the credit score into account, along with the requirement to return the MAXIMUM possible loan sum for the given period.
+  - The requirements were partially implemented as the solution does not take the credit score into account, along with the requirement to return the MAXIMUM possible loan sum for the given period.
 - **Correctness:**
-  - As for the code that was implemented, it was done well with a very good readability and structure. Coding style of the intern has stayed consistent throughout the code, making it nice, organized and understandable.
+  - The implemented code was done well with very good readability and structure. The coding style of the intern has stayed consistent throughout the code, making it organized and understandable.
 - **Scalability**
-  - Although it was easy to use the existing code for modifications, the DecisionEngine class could do better with open-close princliple, as calculating credit modifiers and validating inputs is hardcoded. If new rules or conditions need to be added, the class would need to be modified again. To better work with OCP, we might refactor this to use strategies that can be injected at runtime, allowing for easier extensions without modifying existing code.
+  - Although it was easy to use the existing code for modifications, the DecisionEngine class could better adhere to the open-close principle, as calculating credit modifiers and validating inputs is hardcoded. If new rules or conditions need to be added, the class would need to be modified again. To better work with OCP, we might refactor this to use strategies that can be injected at runtime, allowing for easier extensions without modifying existing code.
 
 
 ## Testing
   - Both manual and integrated testing has been completed:
-    - Integrated tests covered the base cases of the task well and all tests for DesicionEngine passed successfully.
-    - Manual testing was done to ensure the user interface was intuitive and nice to use. Also to eliminate any miscommunications between the front-end and the back-end, if any. The application was easy to use and it displayed all the data expectedly. 
+    - Integrated tests covered the base cases of the task well and all tests for DecisionEngine passed successfully.
+    - Manual testing was done to ensure the user interface was intuitive and nice to use. Also, to eliminate any miscommunications between the front-end and the back-end, if any. The application was easy to use and displayed all data as expected. 
 
 
 ## Documentation
@@ -39,9 +39,9 @@ profile, but for the sake of simplicity this part can be mocked as a hard coded 
 FRONT-END
 ----------
 
-1. State management - as the UI uses sliders to get new values from the customer, it is unefficient to use simple state management like setState() each time a new value comes from the interface. If the user is sliding the slider back and forth it could result in an enormous amout of unneccessary server requests. Instead, a debounce strategy could be implemented. Instead of consistently updating the state it would only need updating once a certain amount of time has passed without new inputs.
-2. API service testing is very basic, could differentiate HTTP status code errors, timeouts and add a retry mechanism for milder network errors to ensure better ux for the customer.
-3. The loan form widget is quite heavy and takes time to go through. It could be made easier to comprahense. Eg. it could be made into two widgets instead of one - loanAmountSlider and loanPeriodSlider, as is done with national ID field. 
+1. State management - as the UI uses sliders to get new values from the customer, it is inefficient to use simple state management like setState() each time a new value comes from the interface. If the user is sliding the slider back and forth it could result in an enormous amount of unnecessary server requests. Instead, a debounce strategy could be implemented. Instead of consistently updating the state, it would only need updating once a certain amount of time has passed without new inputs.
+2. API service testing is very basic, could differentiate HTTP status code errors, timeouts, and add a retry mechanism for milder network errors to ensure better UX for the customer.
+3. The loan form widget is quite heavy and takes time to go through. It could be made easier to comprehend. E.g., it could be made into two widgets instead of one - loanAmountSlider and loanPeriodSlider, as is done with the national ID field.
 
 BACK-END
 ----------
@@ -52,10 +52,10 @@ The root cause of the issue seems to be that the JSON processor used by Spring c
 
 Fix: use Lombok's @NoArgsConstructor annotation to generate a no-argument constructor for DecisionRequest class.
 
-2. Console displays an "Incorrect use of ParentDataWidget." exception - should be looked into to see where the issue arises. It may not cause problems now, but could in the long run. 
-3. One requirement is for the decision engine to return the maximum possibile loan sum for the requested period, even if the used input is less. Currently the engine does not calculate that, it only calculates the sum if it's equal or less than requested.
-4. For people in debt, the engine could also state the reason for why no valid loan can be found.
-5. BIGGEST SHORTCOMING: the ticket requires to implement a scoring algorithm to calculate client's credit score. In this case this solution has not been implemented (to be used for point no. 3). 
+2. Console displays an "Incorrect use of ParentDataWidget." exception - should be looked into to see where the issue arises. It may not cause problems now, but could in the long run.
+3. One requirement is for the decision engine to return the maximum possible loan sum for the requested period, even if the used input is less. Currently, the engine does not calculate that, it only calculates the sum if it's equal to or less than requested.
+4. For people in debt, the engine could also state the reason why no valid loan can be found.
+5. BIGGEST SHORTCOMING: the ticket requires implementing a scoring algorithm to calculate the client's credit score. In this case, this solution has not been implemented (to be used for point no. 3).
 
 To fix the shortcoming: 
 

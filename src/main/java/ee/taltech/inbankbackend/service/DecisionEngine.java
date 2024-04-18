@@ -80,23 +80,21 @@ public class DecisionEngine {
      */
     private int highestValidLoanAmount(Long loanAmount, int loanPeriod) {
         double creditScore = calculateCreditScore(loanAmount, loanPeriod);
-        double newCreditScore = 0;
 
-        if (creditScore == 1){
-            newCreditScore = creditScore;
-        } else if (creditScore > 1 ){
-            while(creditScore > 1){
+        if (creditScore == 1) {
+            return loanAmount.intValue();
+        } else if (creditScore > 1) {
+            while (creditScore > 1) {
                 loanAmount += 100;
                 creditScore = calculateCreditScore(loanAmount, loanPeriod);
             }
-            newCreditScore = creditScore;
         } else {
-            while(newCreditScore < 1){
+            while (creditScore < 1) {
                 loanAmount -= 100;
-                newCreditScore = calculateCreditScore(loanAmount, loanPeriod);
+                creditScore = calculateCreditScore(loanAmount, loanPeriod);
             }
         }
-        return (int) Math.floor(creditModifier * loanPeriod / newCreditScore / 100) * 100;
+        return loanAmount.intValue();
     }  
 
     /**
